@@ -25,23 +25,23 @@ Scenario Outline: I can generate a proper CSharp type from Avro type having a de
 | "{"type": "record", "name":"R", "namespace":"N"}"                             | N.R                         |
 | "{"type": "record", "name":"R"}"                                              | Parent.Namespace.R          |
 #| "{"type": "array", "items": "null"}"                                          | List<Object>                |
-| "{"type": "array", "items": "boolean"}"                                       | IList<Boolean>               |
-| "{"type": "array", "items": "int"}"                                           | IList<Int32>                 |
-| "{"type": "array", "items": "long"}"                                          | IList<Int64>                 |
-| "{"type": "array", "items": "float"}"                                         | IList<Single>                |
-| "{"type": "array", "items": "double"}"                                        | IList<Double>                |
-| "{"type": "array", "items": "string"}"                                        | IList<String>                |
-| "{"type": "array", "items": "bytes"}"                                         | IList<Byte[]>                |
-| "{"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}" | IList<N.R>                   |
+| "{"type": "array", "items": "boolean"}"                                       | List<Boolean>               |
+| "{"type": "array", "items": "int"}"                                           | List<Int32>                 |
+| "{"type": "array", "items": "long"}"                                          | List<Int64>                 |
+| "{"type": "array", "items": "float"}"                                         | List<Single>                |
+| "{"type": "array", "items": "double"}"                                        | List<Double>                |
+| "{"type": "array", "items": "string"}"                                        | List<String>                |
+| "{"type": "array", "items": "bytes"}"                                         | List<Byte[]>                |
+| "{"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}" | List<N.R>                   |
 #| "{"type": "map", "values": "null"}"                                           | Dictionary<String, Object>  |
-| "{"type": "map", "values": "boolean"}"                                        | IDictionary<String, Boolean> |
-| "{"type": "map", "values": "int"}"                                            | IDictionary<String, Int32>   |
-| "{"type": "map", "values": "long"}"                                           | IDictionary<String, Int64>   |
-| "{"type": "map", "values": "float"}"                                          | IDictionary<String, Single>  |
-| "{"type": "map", "values": "double"}"                                         | IDictionary<String, Double>  |
-| "{"type": "map", "values": "string"}"                                         | IDictionary<String, String>  |
-| "{"type": "map", "values": "bytes"}"                                          | IDictionary<String, Byte[]>  |
-| "{"type": "map", "values": {"type": "record", "name":"R", "namespace":"N"}}"  | IDictionary<String, N.R>     |
+| "{"type": "map", "values": "boolean"}"                                        | Dictionary<String, Boolean> |
+| "{"type": "map", "values": "int"}"                                            | Dictionary<String, Int32>   |
+| "{"type": "map", "values": "long"}"                                           | Dictionary<String, Int64>   |
+| "{"type": "map", "values": "float"}"                                          | Dictionary<String, Single>  |
+| "{"type": "map", "values": "double"}"                                         | Dictionary<String, Double>  |
+| "{"type": "map", "values": "string"}"                                         | Dictionary<String, String>  |
+| "{"type": "map", "values": "bytes"}"                                          | Dictionary<String, Byte[]>  |
+| "{"type": "map", "values": {"type": "record", "name":"R", "namespace":"N"}}"  | Dictionary<String, N.R>     |
 | "{"type": "fixed", "size": 10, "name":"F", "namespace":"N"}"                  | Byte[]                      |
 | "{"type": "fixed", "size": 10, "name":"F"}"                                   | Byte[]                      |
 | "["null", "boolean"]"                                                         | Nullable<Boolean>           |
@@ -53,8 +53,8 @@ Scenario Outline: I can generate a proper CSharp type from Avro type having a de
 | "["null", "bytes"]"                                                           | Byte[]                      |
 | "["int", "null", "string"]"                                                   | Object                      |
 # complex nesting types
-| "{"type": "map", "values": {"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}}"                             | IDictionary<String, IList<N.R>>       |
-| "{"type": "array", "items": {"type": "map", "values": {"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}}}" | IList<IDictionary<String, IList<N.R>>> |
+| "{"type": "map", "values": {"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}}"                             | Dictionary<String, List<N.R>>       |
+| "{"type": "array", "items": {"type": "map", "values": {"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}}}" | List<Dictionary<String, List<N.R>>> |
 
 @CheckIn
 Scenario Outline: I can generate a proper CSharp type from Avro type having a forced namespace
@@ -69,10 +69,10 @@ Scenario Outline: I can generate a proper CSharp type from Avro type having a fo
 | "{"type": "enum", "name": "E", "symbols" : ["A", "B"]}"                       | Forced.Namespace.E                      |
 | "{"type": "record", "name":"R", "namespace":"N"}"                             | Forced.Namespace.R                      |
 | "{"type": "record", "name":"R"}"                                              | Forced.Namespace.R                      |
-| "{"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}" | IList<Forced.Namespace.R>               |
-| "{"type": "map", "values": {"type": "record", "name":"R", "namespace":"N"}}"  | IDictionary<String, Forced.Namespace.R> |
-| "{"type": "map", "values": {"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}}"                             | IDictionary<String, IList<Forced.Namespace.R>>       |
-| "{"type": "array", "items": {"type": "map", "values": {"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}}}" | IList<IDictionary<String, IList<Forced.Namespace.R>>> |
+| "{"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}" | List<Forced.Namespace.R>               |
+| "{"type": "map", "values": {"type": "record", "name":"R", "namespace":"N"}}"  | Dictionary<String, Forced.Namespace.R> |
+| "{"type": "map", "values": {"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}}"                             | Dictionary<String, List<Forced.Namespace.R>>       |
+| "{"type": "array", "items": {"type": "map", "values": {"type": "array", "items": {"type": "record", "name":"R", "namespace":"N"}}}}" | List<Dictionary<String, List<Forced.Namespace.R>>> |
 
 @CheckIn
 Scenario Outline: I can generate a proper CSharp type from Avro type without having a namespace and using default namespace
@@ -85,7 +85,7 @@ Scenario Outline: I can generate a proper CSharp type from Avro type without hav
 | "{"type": "enum", "name": "E", "symbols" : ["A", "B"]}"                      | Default.Namespace.E      |
 | "{"type": "record", "name":"R", "namespace":"N"}"                            | N.R                      |
 | "{"type": "record", "name":"R"}"                                             | Default.Namespace.R      |
-| "{"type": "map", "values": {"type": "record", "name":"R", "namespace":"N"}}" | IDictionary<String, N.R> |
+| "{"type": "map", "values": {"type": "record", "name":"R", "namespace":"N"}}" | Dictionary<String, N.R> |
 
 @CheckIn
 Scenario Outline: I can generate a proper CSharp type from Avro type without having a namespace and using forced namespace
@@ -98,7 +98,7 @@ Scenario Outline: I can generate a proper CSharp type from Avro type without hav
 | "{"type": "enum", "name": "E", "symbols" : ["A", "B"]}"                      | Forced.Namespace.E                      |
 | "{"type": "record", "name":"R", "namespace":"N"}"                            | Forced.Namespace.R                      |
 | "{"type": "record", "name":"R"}"                                             | Forced.Namespace.R                      |
-| "{"type": "map", "values": {"type": "record", "name":"R", "namespace":"N"}}" | IDictionary<String, Forced.Namespace.R> |
+| "{"type": "map", "values": {"type": "record", "name":"R", "namespace":"N"}}" | Dictionary<String, Forced.Namespace.R> |
 
 @CheckIn
 Scenario Outline: I can serialize generated types with default values with default namespace

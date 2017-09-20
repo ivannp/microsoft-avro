@@ -21,20 +21,12 @@
         var mapSchema = typeSchema as MapSchema;
         if (mapSchema != null)
         {
-            if(!inAttribute && isDeclaration && !startRhs)
-            {
-                #>I<#+
-            }
             #>Dictionary<string, <#+ GenerateType(mapSchema.ValueSchema, isDeclaration, inAttribute, false); #>><#+
             return;
         }
         var arraySchema = typeSchema as ArraySchema;
         if (arraySchema != null)
         {
-            if(!inAttribute && isDeclaration && !startRhs)
-            {
-                #>I<#+
-            }
             #>List<<#+ GenerateType(arraySchema.ItemSchema, isDeclaration, inAttribute, false); #>><#+
             return;
         }
